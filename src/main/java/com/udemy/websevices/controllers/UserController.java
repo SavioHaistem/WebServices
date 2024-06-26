@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/users")
-public class UserResources {
+public class UserController {
     @GetMapping
     public ResponseEntity<User> getUser() {
         User user = new User(1,"Leo","0800","entre.vaicachorra","minhasenha.fuleira");
