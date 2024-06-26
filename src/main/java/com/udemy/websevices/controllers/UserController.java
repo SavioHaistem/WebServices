@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @GetMapping
     public ResponseEntity<User> getUser() {
-        User user = new User(1,"Leo","0800","entre.vaicachorra","minhasenha.fuleira");
+        User user = new User(1, "Leo", "0800", "entre.vaicachorra", "minhasenha.fuleira");
         return ResponseEntity.ok().body(user);
     }
 }
