@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="port:9090" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.udemy.websevices.WebsevicesApplication" />
+    <module name="websevices" />
+    <option name="VM_PARAMETERS" value="-Dserver.port=9090" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
