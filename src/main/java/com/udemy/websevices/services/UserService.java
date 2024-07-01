@@ -14,8 +14,8 @@ public class UserService {
     private UserRepository repository;
 
     public User findById(Long id) {
-        Optional<User> optionalUser = repository.findById(id);
-        return optionalUser.get();
+        Optional<User> user = repository.findById(id);
+        return user.orElse(null);
     }
     public List<User> findAll() {
         return repository.findAll();

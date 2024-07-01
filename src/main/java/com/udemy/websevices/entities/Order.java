@@ -1,5 +1,7 @@
 package com.udemy.websevices.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -10,9 +12,12 @@ import java.util.Objects;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant moment;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "clientID")
     private User client;
@@ -20,7 +25,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, User client) {
         this.id = id;
         this.moment = moment;
         this.client = client;
