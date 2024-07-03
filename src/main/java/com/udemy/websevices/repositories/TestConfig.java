@@ -1,5 +1,6 @@
 package com.udemy.websevices.repositories;
 
+import com.udemy.websevices.entities.Category;
 import com.udemy.websevices.entities.Order;
 import com.udemy.websevices.entities.User;
 import com.udemy.websevices.entities.enums.OrderStatus;
@@ -18,6 +19,8 @@ public class TestConfig implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -26,7 +29,11 @@ public class TestConfig implements CommandLineRunner {
         Order o1 = new Order(null, Instant.parse("2024-06-28T09:52:07Z"), OrderStatus.WAITING_PAYMENT,u1);
         Order o2 = new Order(null, Instant.parse("2024-06-28T09:53:27Z"), OrderStatus.PAID, u2);
         Order o3 = new Order(null, Instant.parse("2024-06-28T09:52:50Z"), OrderStatus.CANCELED, u1);
+        Category c1 = new Category(null, "Books");
+        Category c2 = new Category(null,"Technologies");
+        Category c3 = new Category(null, "Clothes");
         userRepository.saveAll(Arrays.asList(u1,u2));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+        categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
     }
 }
