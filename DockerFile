@@ -10,4 +10,4 @@ RUN mvn clean install
 FROM openjdk:22-slim
 
 EXPOSE 9090
-COPY --from=build /target/
+COPY --from=build /target/webservices-0.0.1-SNAPSHOT.jar webservices.jar
