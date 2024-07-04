@@ -2,6 +2,7 @@ package com.udemy.websevices.repositories;
 
 import com.udemy.websevices.entities.Category;
 import com.udemy.websevices.entities.Order;
+import com.udemy.websevices.entities.Product;
 import com.udemy.websevices.entities.User;
 import com.udemy.websevices.entities.enums.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,15 @@ import java.util.Arrays;
 public class TestConfig implements CommandLineRunner {
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private OrderRepository orderRepository;
+
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -32,8 +38,12 @@ public class TestConfig implements CommandLineRunner {
         Category c1 = new Category(null, "Books");
         Category c2 = new Category(null,"Technologies");
         Category c3 = new Category(null, "Clothes");
+        Product p1 = new Product(null,"RTX 2080","video board",800.0,"0hfaldf.img");
+        Product p2 = new Product(null,"Sapiens","history of humanity",50.0,"af9qw.img");
+        Product p3 = new Product(null,"dress","lilac glitter dress",100.0,"noaraodhjfa.png");
         userRepository.saveAll(Arrays.asList(u1,u2));
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
         categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
+        productRepository.saveAll(Arrays.asList(p1,p2,p3));
     }
 }

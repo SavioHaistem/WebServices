@@ -1,7 +1,6 @@
 package com.udemy.websevices.services;
 
 import com.udemy.websevices.entities.Category;
-import com.udemy.websevices.entities.Order;
 import com.udemy.websevices.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
