@@ -1,5 +1,6 @@
 package com.udemy.websevices.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -15,6 +16,11 @@ public class Product {
     private String description;
     private Double price;
     private String imgUrl;
+
+    @JsonIgnore
+    @JoinColumn(name = "categoryID")
+    @ManyToOne
+    private Category category;
 
     public Long getId() {
         return id;
