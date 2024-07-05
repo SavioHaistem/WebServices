@@ -21,7 +21,7 @@ public class Order {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "clientID")
+    @JoinColumn(name = "client_IDs")
     private User client;
 
     public Order() {
