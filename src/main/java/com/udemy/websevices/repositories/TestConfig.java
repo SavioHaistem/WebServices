@@ -1,9 +1,6 @@
 package com.udemy.websevices.repositories;
 
-import com.udemy.websevices.entities.Category;
-import com.udemy.websevices.entities.Order;
-import com.udemy.websevices.entities.Product;
-import com.udemy.websevices.entities.User;
+import com.udemy.websevices.entities.*;
 import com.udemy.websevices.entities.enums.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +25,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
     @Override
     public void run(String... args) throws Exception {
         User u1 = new User(null,"Savio","84 99991-8236","savio.dantas.5858@gmail.com","alltest");
@@ -43,6 +43,10 @@ public class TestConfig implements CommandLineRunner {
         Product p3 = new Product(null,"MacBook Pro","lorem ipsum dolor eu amat",1250.0,"macbookpro.png");
         Product p4 = new Product(null,"PC Gamer","Donec aliquer odio ac rhocus cursus",1200.0,"pcgamer.png");
         Product p5 = new Product(null,"Rails for Dummies","Cras fringilla convallis sem vel faucibus",100.99,"railsfordummies.png");
+        OrderItem oi1 = new OrderItem(p1, o1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(p3, o1, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(p3, o2, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(p5, o3, 2, p5.getPrice());
         p1.getCategories().add(c2);
         p2.getCategories().add(c1);
         p2.getCategories().add(c3);
@@ -53,5 +57,6 @@ public class TestConfig implements CommandLineRunner {
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
         categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
         productRepository.saveAll(Arrays.asList(p1,p2,p3));
+        orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
     }
 }

@@ -4,25 +4,28 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
 @Entity
 @Table(name = "tb_order_item")
-public class OrderItem {
+public class OrderItem implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
     public OrderItem() {
     }
 
-    public OrderItem(Integer quantity, Double price, Order order, Product product) {
+    public OrderItem(Product product, Order order,Integer quantity, Double price) {
+        this.id.setProduct(product);
+        this.id.setOrder(order);
         this.quantity = quantity;
         this.price = price;
-        this.id.setOrder(order);
-        this.id.setProduct(product);
     }
 
     public Order getOrder() {
@@ -56,7 +59,6 @@ public class OrderItem {
     public void setPrice(Double price) {
         this.price = price;
     }
-
 
     @Override
     public boolean equals(Object o) {

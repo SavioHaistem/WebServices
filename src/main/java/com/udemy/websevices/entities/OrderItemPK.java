@@ -10,6 +10,7 @@ import java.util.Objects;
 
 @Embeddable
 public class OrderItemPK implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -43,15 +44,5 @@ public class OrderItemPK implements Serializable {
         this.product = product;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OrderItemPK orderItemPK)) return false;
-        return Objects.equals(order, orderItemPK.order) && Objects.equals(product, orderItemPK.product);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(order, product);
-    }
 }
