@@ -27,9 +27,6 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_IDs")
     private User client;
-    @OneToMany(mappedBy = "id.order")
-    private Set<OrderItem> orderItems = new HashSet<>();
-
     public Order() {
     }
 
@@ -73,11 +70,6 @@ public class Order implements Serializable {
     public void setClient(User client) {
         this.client = client;
     }
-
-    public Set<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
