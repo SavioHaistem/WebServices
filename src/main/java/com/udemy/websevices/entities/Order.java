@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.udemy.websevices.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +25,13 @@ public class Order implements Serializable {
     private Instant moment;
     private Integer orderStatus;
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "client_IDs")
+    @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private final Set<OrderItem> items = new HashSet<>();
+
     public Order() {
     }
 
@@ -70,15 +75,21 @@ public class Order implements Serializable {
     public void setClient(User client) {
         this.client = client;
     }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Order order)) return false;
-        return Objects.equals(id, order.id) && Objects.equals(moment, order.moment) && Objects.equals(orderStatus, order.orderStatus);
+
+        return Objects.equals(id, order.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, moment, orderStatus);
+        return Objects.hashCode(id);
     }
 }

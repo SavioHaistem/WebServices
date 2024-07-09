@@ -22,6 +22,7 @@ public class User implements Serializable {
     private String email;
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
@@ -81,10 +82,11 @@ public class User implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User user)) return false;
-        return id == user.id;
+
+        return Objects.equals(id, user.id);
     }
 
     @Override

@@ -1,22 +1,22 @@
 package com.udemy.websevices.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.udemy.websevices.entities.pk.OrderItemPk;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
-
     @EmbeddedId
-    private OrderItemPk id;
-
+    private OrderItemPk id = new OrderItemPk();
     private Integer quantity;
     private Double price;
 
@@ -50,6 +50,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }
@@ -67,14 +68,15 @@ public class OrderItem implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof OrderItem orderItem)) return false;
-        return Objects.equals(id, orderItem.id);
+
+        return id.equals(orderItem.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return id.hashCode();
     }
 }
