@@ -83,7 +83,6 @@ public class Product implements Serializable {
     public Set<Category> getCategories() {
         return categories;
     }
-
     @JsonIgnore
     public Set<Order> getOrders() {
         return orderItems.stream().map(OrderItem::getOrder).collect(Collectors.toSet());
