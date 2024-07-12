@@ -8,7 +8,6 @@ import jakarta.persistence.Table;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order_item")
@@ -20,7 +19,7 @@ public class OrderItem implements Serializable {
     private Integer quantity;
     private Double price;
 
-    public Double subTotal() {
+    public Double getSubTotale() {
         return quantity * price;
     }
 
