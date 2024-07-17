@@ -17,7 +17,16 @@ public class UserService {
         Optional<User> user = repository.findById(id);
         return user.orElse(null);
     }
+
     public List<User> findAll() {
         return repository.findAll();
+    }
+
+    public void insert(User user) {
+        repository.save(user);
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
     }
 }
