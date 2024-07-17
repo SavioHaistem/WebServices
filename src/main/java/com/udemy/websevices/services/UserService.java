@@ -1,7 +1,9 @@
 package com.udemy.websevices.services;
 
+import com.udemy.websevices.controllers.exceptions.ResourceExceptionRendler;
 import com.udemy.websevices.entities.User;
 import com.udemy.websevices.repositories.UserRepository;
+import com.udemy.websevices.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = repository.findById(id);
-        return user.orElse(null);
+        return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public List<User> findAll() {
