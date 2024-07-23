@@ -1,6 +1,5 @@
 package com.udemy.websevices.services;
 
-import com.udemy.websevices.controllers.exceptions.ResourceExceptionRendler;
 import com.udemy.websevices.entities.User;
 import com.udemy.websevices.repositories.UserRepository;
 import com.udemy.websevices.services.exceptions.ResourceNotFoundException;
