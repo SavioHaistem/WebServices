@@ -4,11 +4,13 @@ import com.udemy.websevices.entities.User;
 import com.udemy.websevices.repositories.UserRepository;
 import com.udemy.websevices.services.exceptions.DatabaseException;
 import com.udemy.websevices.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,13 +38,17 @@ public class UserService {
                 repository.deleteById(id);
             }
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException(e.getMessage());
+            throw new DatabaseException("Integrity violation error for user with id: " + id + ", we can`t remove this");
         }
     }
 
     public User update(Long id, User user) {
         User entity = repository.getReferenceById(id);
-        updateData(entity,user);
+        try {
+            updateData(entity,user);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
         return repository.save(entity);
     }
 
