@@ -2,8 +2,11 @@ package com.udemy.websevices.services;
 
 import com.udemy.websevices.entities.User;
 import com.udemy.websevices.repositories.UserRepository;
+import com.udemy.websevices.services.exceptions.DatabaseException;
 import com.udemy.websevices.services.exceptions.ResourceNotFoundException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +31,13 @@ public class UserService {
     }
 
     public void deleteById(Long id) {
-        repository.deleteById(id);
+        try {
+            if (findById(id) != null) {
+                repository.deleteById(id);
+            }
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User user) {
